@@ -1,26 +1,52 @@
 <div class="start">
 <mat-card class="example-card" >
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
-  </mat-card-content>
+  <img mat-card-image src="./assets/account.png" alt="Photo of a Shiba Inu">
+  <button class="select-image" mat-button >Select Image</button>
+
+  <form [formGroup]="accountFormGroup" (ngSubmit)="createAccount()">
+    <div fxLayout="column">
+      <h1>Create profile</h1>
+      <mat-form-field >
+        <input class="form-control" type="username" matInput placeholder="Username" formControlName="userName" required minlength="{{usernameMinLength}}"  maxlength="{{usernameMaxLength}}">
+        <mat-hint align="end">{{usernameMinLength}}-{{usernameMaxLength}} characters long.</mat-hint>
+        <mat-error *ngIf="hasError('userName', 'required')">Name is required</mat-error>
+        <mat-error *ngIf="hasError('userName', 'maxlength')">You have more than {{usernameMaxLength}} characters</mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <input class="form-control" type="name" matInput placeholder="Name" formControlName="name" required>
+        <mat-error *ngIf="hasError('userName', 'required')">Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="form-control" type="password" matInput placeholder="Password" formControlName="password" required minlength="{{passwordMinLength}}"  maxlength="{{passwordMaxLength}}">
+        <mat-hint align="end">{{passwordMinLength}}-{{passwordMaxLength}}  characters long.</mat-hint>
+        <mat-error *ngIf="hasError('password', 'required')">Password is required </mat-error>
+        <mat-error *ngIf="hasError('password', 'maxlength')">You have more than {{passwordMaxLength}} characters</mat-error>
+        <mat-error *ngIf="hasError('password', 'pattern')">You need to have uppercase letter,lowercase letter and number</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="form-control" type="password" matInput placeholder="Confirm Password" formControlName="confrimPassword" required minlength="{{passwordMinLength}}"  maxlength="{{passwordMaxLength}}">
+        <mat-hint align="end">{{passwordMinLength}}-{{passwordMaxLength}}  characters long.</mat-hint>
+        <mat-error *ngIf="hasError('confrimPassword', 'required')">Password is required</mat-error>
+        <mat-error *ngIf="hasError('confrimPassword', 'maxlength')">You have more than {{passwordMaxLength}} characters</mat-error>
+        <mat-error *ngIf="hasError('confrimPassword', 'passwordMatch')">Passwords need to match</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input class="form-control" type="email" matInput placeholder="Email" formControlName="email" required minlength="{{emailMinLength}}"  maxlength="{{emailMaxLength}}  ">
+        <mat-hint align="end">{{emailMinLength}}-{{emailMaxLength}} characters long.</mat-hint>
+        <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+        <mat-error *ngIf="hasError('email', 'maxlength')">You have more than {{emailMaxLength}} characters</mat-error>
+        <mat-error *ngIf="hasError('email', 'email')">It need to be an email</mat-error>
+      </mat-form-field>
+
+    </div>
+    <button mat-button mat-raised-button type="submit">Save</button>
+    <button mat-button mat-raised-button routerLink="/subscriptions">Back</button>
+  </form>
   <mat-card-actions>
+
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
-  <mat-form-field  hintLabel="Max 10 characters" appearance="fill" >
-    <mat-label>Enter some input</mat-label>
-    <input matInput  #input maxlength="10" placeholder="Ex. Nougat" >
-    <mat-hint align="end">{{input .value?.length || 0}}/10</mat-hint>
-  </mat-form-field>
+
 </div>

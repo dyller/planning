@@ -14,6 +14,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import {MatSelectModule} from "@angular/material/select";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {environment} from "../environments/environment";
+import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 @NgModule({
   declarations: [
@@ -27,12 +33,15 @@ import {MatSelectModule} from "@angular/material/select";
     BrowserAnimationsModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

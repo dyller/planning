@@ -7,7 +7,8 @@ const routes: Routes = [{
   path: 'home',
   component: FrontPageComponent
 },
-  { path: 'user', loadChildren: () => import('./user/customers.module').then(m => m.CustomersModule) },];
+  { path: 'user', loadChildren: () => import('./user/customers.module').then(m => m.CustomersModule) },
+  { path: 'tasks', loadChildren: () => import('./task/task.module').then(m => m.TaskModule) },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

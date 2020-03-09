@@ -1,6 +1,9 @@
 <mat-toolbar color=#000000 id="navbar" class="sticky">
-  <div class="example-button-row">
+  <div *ngIf="!currentUser" class="example-button-row">
     <button mat-flat-button routerLink="/user/new">Sign-Up</button>
+  </div>
+  <div *ngIf="currentUser" class="example-button-row">
+    <button mat-flat-button (click)="logout()">{{currentUser.userName}}</button>
   </div>
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
@@ -8,7 +11,7 @@
 </mat-toolbar>
 <!-- Side navigation -->
 <div class="sidenav">
-  <a href="#">About</a>
+  <a routerLink="/tasks">Task</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
