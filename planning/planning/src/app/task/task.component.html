@@ -1,24 +1,33 @@
 <div cdkDropListGroup class="start">
 
-  <div class="example-container" *ngFor="let t of test">
-    <h2>{{t.name}}</h2>
+  <div  class="example-container" *ngFor="let t of test">
+    <div class="example-list">
+  <h2>{{t.name}}</h2>
 
-    <div
-      cdkDropList
-      [cdkDropListData]="t.items"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of t.items" cdkDrag>{{item}}</div>
-      <div class="example-box" >
-        <form >
-          <mat-form-field class="example-full-width" >
-            <mat-label>New task</mat-label>
-            <input  matInput    #txtVal (keydown.enter)="saveTask($event,t.name)" >
-          </mat-form-field>
-        </form>
-      </div>
+  <div
+    cdkDropList
+    [cdkDropListData]="t.items"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of t.items" cdkDrag>{{item}}</div>
+    <div class="example-box" >
+      <form >
+        <mat-form-field class="example-full-width" >
+          <mat-label>New task</mat-label>
+          <input  matInput    #txtVal (keydown.enter)="saveTask($event,t.name)" >
+        </mat-form-field>
+      </form>
     </div>
   </div>
+    </div>
+</div>
 
   <div class="example-container">
+    <form >
+      <mat-form-field class="example-full-width" >
+        <mat-label>New title</mat-label>
+        <input  matInput    #txtVal (keydown.enter)="newTitle($event)" >
+      </mat-form-field>
+    </form>
+</div>
 </div>

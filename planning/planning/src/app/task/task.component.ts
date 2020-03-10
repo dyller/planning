@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {FormControl, FormGroup} from '@angular/forms';
+// @ts-ignore
 import {TaskModel} from '../shared/entities/task-model';
+import {UserModel} from "../shared/entities/user-model";
+import {createUrlResolverWithoutPackagePrefix} from "@angular/compiler";
 
 @Component({
   selector: 'app-task',
@@ -25,7 +28,7 @@ export class TaskComponent implements OnInit {
    ]}
  ];
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -41,13 +44,27 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+//create new task
   saveTask(newTask: any, name: string) {
-    console.log(newTask.target.value);
-    const index = this.test.findIndex(t => t.name === name);
-    const item = this.test[index];
-    item.items[item.items.length] = newTask.target.value;
-    newTask.target.value = '';
-
+    if (name && newTask && newTask.target.value) {
+      const index = this.test.findIndex(t => t.name === name);
+      if ( this.test[index].items) {
+        const item = this.test[index];
+        item.items[item.items.length] = newTask.target.value;
+      } else {
+        this.test[index].items = [newTask.target.value];
+      }
+      newTask.target.value = '';
+    }
   }
+// add new title
+  newTitle(event: any) {
+
+    if (event && event.target.value) {
+     const index = this.test.length;
+     this.test[index] = {name: event.target.value};
+     event.target.value = '';
+    }
+  }
+
 }
