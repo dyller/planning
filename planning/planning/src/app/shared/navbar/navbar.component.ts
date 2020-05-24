@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.auth.auth.signOut().then( () => {
+    this.auth.signOut().then( () => {
       this.router.navigate([''],
         {relativeTo: this.activatedRoute}); }
     );

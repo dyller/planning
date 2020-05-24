@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {TaskModel} from '../shared/entities/task-model';
 import {UserModel} from "../shared/entities/user-model";
 import {createUrlResolverWithoutPackagePrefix} from "@angular/compiler";
+import {RowModel} from "../shared/entities/row-model";
 
 @Component({
   selector: 'app-task',
@@ -12,20 +13,14 @@ import {createUrlResolverWithoutPackagePrefix} from "@angular/compiler";
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
- test: TaskModel[] = [
-   {items: [ 'Get to work',
-       'Pick up groceries',
-       'Go home',
-       'Fall asleep'],
-   name: 'todo'},
-   {name: 'done',
-   items: [
-     'Get up',
-     'Brush teeth',
-     'Take a shower',
-     'Check e-mail',
-     'Walk dog'
-   ]}
+ test: RowModel[] = [{name: 'test',
+   task: [{title: 'kage'}
+   ]
+ },
+   {name: 'test',
+     task: [{title: 'kage'}
+     ]
+   }
  ];
 
   drop(event: CdkDragDrop<any[]>) {
@@ -44,25 +39,27 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
   }
-//create new task
+// create new task
   saveTask(newTask: any, name: string) {
     if (name && newTask && newTask.target.value) {
       const index = this.test.findIndex(t => t.name === name);
-      if ( this.test[index].items) {
+
+      if ( this.test[index].task) {
         const item = this.test[index];
-        item.items[item.items.length] = newTask.target.value;
+        item.task[item.task.length] = newTask.target.value;
       } else {
-        this.test[index].items = [newTask.target.value];
+        this.test[index].task = [newTask.target.value];
       }
       newTask.target.value = '';
     }
   }
-// add new title
-  newTitle(event: any) {
+// add new row
+  newRow(event: any) {
 
     if (event && event.target.value) {
      const index = this.test.length;
-     this.test[index] = {name: event.target.value};
+     this.test[index] = {name: event.target.value,
+     task: []};
      event.target.value = '';
     }
   }

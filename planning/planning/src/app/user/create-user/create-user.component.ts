@@ -83,7 +83,7 @@ export class CreateUserComponent implements OnInit {
   createAccount() {
     if (this.accountFormGroup.invalid === false) {
       const accountData = this.accountFormGroup.value;
-      return this.auth.auth.createUserWithEmailAndPassword(accountData.email, accountData.password).then(user => {
+      return this.auth.createUserWithEmailAndPassword(accountData.email, accountData.password).then(user => {
         accountData.password = null;
         accountData.confrimPassword = null;
         accountData.userId = user.user.uid;

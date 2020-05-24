@@ -6,10 +6,10 @@
 
   <div
     cdkDropList
-    [cdkDropListData]="t.items"
+    [cdkDropListData]="t.task"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of t.items" cdkDrag>{{item}}</div>
+    <div class="example-box" *ngFor="let item of t.task" cdkDrag>{{item.title}}</div>
     <div class="example-box" >
       <form >
         <mat-form-field class="example-full-width" >
@@ -26,7 +26,7 @@
     <form >
       <mat-form-field class="example-full-width" >
         <mat-label>New title</mat-label>
-        <input  matInput    #txtVal (keydown.enter)="newTitle($event)" >
+        <input  matInput    #txtVal (keydown.enter)="newRow($event)" >
       </mat-form-field>
     </form>
 </div>

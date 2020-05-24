@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "planning"
+  "defaultProject": "planning",
+  "cli": {
+    "analytics": "71e8756e-d623-4cdc-a5eb-07ef7be65f01"
+  }
 }
