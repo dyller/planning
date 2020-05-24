@@ -70,7 +70,7 @@
       <workItem from="1589993396903" duration="187000" />
       <workItem from="1590047308154" duration="2551000" />
       <workItem from="1590253439935" duration="637000" />
-      <workItem from="1590310311353" duration="1935000" />
+      <workItem from="1590310311353" duration="6688000" />
     </task>
     <servers />
   </component>
@@ -94,5 +94,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1590048242722" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1590324013714">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1590324013714" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/planning/planning/src/app/task/task.component.ts</url>
+          <line>4</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

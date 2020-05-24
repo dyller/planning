@@ -3,9 +3,10 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {FormControl, FormGroup} from '@angular/forms';
 // @ts-ignore
 import {TaskModel} from '../shared/entities/task-model';
-import {UserModel} from "../shared/entities/user-model";
-import {createUrlResolverWithoutPackagePrefix} from "@angular/compiler";
-import {RowModel} from "../shared/entities/row-model";
+import {UserModel} from '../shared/entities/user-model';
+import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
+import {RowModel} from '../shared/entities/row-model';
+import {BoardServiceService} from '../shared/service/board-service.service';
 
 @Component({
   selector: 'app-task',
@@ -13,15 +14,8 @@ import {RowModel} from "../shared/entities/row-model";
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
- test: RowModel[] = [{name: 'test',
-   task: [{title: 'kage'}
-   ]
- },
-   {name: 'test',
-     task: [{title: 'kage'}
-     ]
-   }
- ];
+  done = true;
+ board: RowModel[] ;
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
@@ -33,22 +27,22 @@ export class TaskComponent implements OnInit {
         event.currentIndex);
     }
   }
-  constructor() {
+  constructor(private boardServiceService: BoardServiceService) {
 
   }
 
   ngOnInit(): void {
+    this.getRows();
   }
 // create new task
   saveTask(newTask: any, name: string) {
     if (name && newTask && newTask.target.value) {
-      const index = this.test.findIndex(t => t.name === name);
-
-      if ( this.test[index].task) {
-        const item = this.test[index];
-        item.task[item.task.length] = newTask.target.value;
+      const index = this.board.findIndex(t => t.name === name);
+      if ( this.board[index].task) {
+        const item = this.board[index];
+        item.task[item.task.length] = {title: newTask.target.value};
       } else {
-        this.test[index].task = [newTask.target.value];
+        this.board[index].task = [newTask.target.value];
       }
       newTask.target.value = '';
     }
@@ -56,12 +50,24 @@ export class TaskComponent implements OnInit {
 // add new row
   newRow(event: any) {
 
-    if (event && event.target.value) {
-     const index = this.test.length;
-     this.test[index] = {name: event.target.value,
-     task: []};
-     event.target.value = '';
+    if (event && event.target.value && this.done) {
+       this.done = false;
+       this.boardServiceService.addRow({name: event.target.value,
+       task: []}).subscribe( rowData => {
+       const index = this.board.length;
+       this.board[index] = {rowId: rowData.rowId,
+                            name: rowData.name};
+       event.target.value = '';
+       this.done = true;
+     });
     }
   }
+  // read Rows.
+  getRows() {
+    this.boardServiceService.readRows().subscribe(rows => {
+      this.board = rows;
+    });
+  }
+
 
 }
