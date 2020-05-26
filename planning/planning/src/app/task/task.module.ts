@@ -10,10 +10,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from "@angular/material/menu";
+import { DialogRowDeleteComponent } from './dialogs/dialog-row-delete/dialog-row-delete.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
-  declarations: [TaskComponent],
+  declarations: [TaskComponent, DialogRowDeleteComponent],
   imports: [
     CommonModule,
     TaskRoutingModule,
@@ -24,7 +27,9 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     ReactiveFormsModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule,
+    MatDialogModule
   ]
 })
 export class TaskModule { }

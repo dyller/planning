@@ -20,7 +20,8 @@ export const environment = {
     appId: '1:642336253762:web:ce12e4cc88e9d71dc54adb',
     measurementId: 'G-FCLKGNXFL6'
   },
-  rowModelPath: 'rowModel'
+  rowModelPath: 'rowModel',
+  taskModelPath: 'taskModel'
 };
 
 /*

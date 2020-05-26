@@ -1,8 +1,8 @@
 <div cdkDropListGroup class="start">
 
-  <div  class="example-container" *ngFor="let t of board">
-    <div class="example-list">
-  <h2>{{t.name}}</h2>
+  <div  class="example-container" *ngFor="let t of board" >
+    <div class="example-list" >
+  <h2 (contextmenu)="onContextMenuRow($event, t)">{{t.name}}</h2>
 
   <div
     cdkDropList
@@ -14,7 +14,7 @@
       <form >
         <mat-form-field class="example-full-width" >
           <mat-label>New task</mat-label>
-          <input  matInput    #txtVal (keydown.enter)="saveTask($event,t.name)" >
+          <input  matInput    #txtVal (keydown.enter)="saveTask($event,t.rowId)" >
         </mat-form-field>
       </form>
     </div>
@@ -30,4 +30,14 @@
       </mat-form-field>
     </form>
 </div>
+  <div style="visibility: hidden; position: fixed"
+       [style.left]="contextMenuPosition.x"
+       [style.top]="contextMenuPosition.y"
+       [matMenuTriggerFor]="contextMenuRow">
+  </div>
 </div>
+<mat-menu #contextMenuRow="matMenu">
+  <ng-template matMenuContent let-item='row'>
+    <button mat-menu-item (click)="onRightClickRow(item)">Delete {{item.name}} </button>
+  </ng-template>
+</mat-menu>

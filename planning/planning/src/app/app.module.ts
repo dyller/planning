@@ -40,6 +40,7 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
+    MatMenuModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]
