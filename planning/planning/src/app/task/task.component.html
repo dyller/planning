@@ -9,7 +9,7 @@
     [cdkDropListData]="t.task"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of t.task" cdkDrag>{{item.title}}</div>
+    <div class="example-box" *ngFor="let item of t.task" (contextmenu)="onContextMenuTask($event, item)" cdkDrag>{{item.title}}</div>
     <div class="example-box" >
       <form >
         <mat-form-field class="example-full-width" >
@@ -35,9 +35,20 @@
        [style.top]="contextMenuPosition.y"
        [matMenuTriggerFor]="contextMenuRow">
   </div>
+  <div style="visibility: hidden; position: fixed"
+       [style.left]="contextMenuPosition.x"
+       [style.top]="contextMenuPosition.y"
+       [matMenuTriggerFor]="contextMenuTask">
+  </div>
 </div>
 <mat-menu #contextMenuRow="matMenu">
-  <ng-template matMenuContent let-item='row'>
+  <ng-template matMenuContent let-item='row' >
     <button mat-menu-item (click)="onRightClickRow(item)">Delete {{item.name}} </button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #contextMenuTask="matMenu">
+  <ng-template matMenuContent let-item='task'>
+    <button mat-menu-item >Delete {{item.title}} </button>
   </ng-template>
 </mat-menu>

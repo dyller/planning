@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {FormControl, FormGroup} from '@angular/forms';
 // @ts-ignore
@@ -21,9 +21,8 @@ export class TaskComponent implements OnInit {
   // Used for controlling so it only post one time.
   done = true;
   board: RowModel[] ;
-
-  @ViewChild(MatMenuTrigger)
-  contextMenuRow: MatMenuTrigger;
+  @ViewChildren(MatMenuTrigger) trigger: QueryList<MatMenuTrigger>;
+ 
 
   contextMenuPosition = { x: '0px', y: '0px' };
   constructor(private boardServiceService: BoardServiceService,
@@ -31,14 +30,23 @@ export class TaskComponent implements OnInit {
 
   }
   onContextMenuRow(event: MouseEvent, item: RowModel) {
+    this.contextPosition(event);
+    this.trigger.toArray()[0].menuData ={'row': item};
+    this.trigger.toArray()[0].menu.focusFirstItem('mouse');
+    this.trigger.toArray()[0].openMenu();
+  }
+  contextPosition(event: MouseEvent) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenuRow.menuData ={'row': item};
-    this.contextMenuRow.menu.focusFirstItem('mouse');
-    this.contextMenuRow.openMenu();
   }
-
+  onContextMenuTask(event: MouseEvent, item: TaskModel) {
+    console.log('here' + this.contextMenuPosition.x);
+    this.contextPosition(event);
+    this.trigger.toArray()[1].menuData ={'task': item};
+    this.trigger.toArray()[1].menu.focusFirstItem('mouse');
+    this.trigger.toArray()[1].openMenu();
+  }
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -122,4 +130,6 @@ export class TaskComponent implements OnInit {
       alert('Error happen contact support pls.');
     }
   }
+
+
 }
