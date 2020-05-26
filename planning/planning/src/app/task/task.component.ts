@@ -80,9 +80,11 @@ export class TaskComponent implements OnInit {
        this.done = false;
        this.boardServiceService.addRow({name: event.target.value,
        task: []}).subscribe( rowData => {
-       const index = this.board.length;
-       this.board[index] = {rowId: rowData.rowId,
-                            name: rowData.name};
+         // does not look like i need this because it subscribe.
+         /* const index = this.board.length;
+            console.log('so');
+          this.board[index] = {rowId: rowData.rowId,
+                               name: rowData.name};*/
        event.target.value = '';
        this.done = true;
      });
