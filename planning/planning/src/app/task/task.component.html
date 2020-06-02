@@ -2,14 +2,15 @@
 
   <div  class="example-container" *ngFor="let t of board" >
     <div class="example-list" >
-  <h2 (contextmenu)="onContextMenuRow($event, t)">{{t.name}}</h2>
+  <h2 class="title-task" (contextmenu)="onContextMenuRow($event, t)">{{t.name}}</h2>
 
   <div
     cdkDropList
     [cdkDropListData]="t.task"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of t.task" (contextmenu)="onContextMenuTask($event, item)" cdkDrag>{{item.title}}</div>
+    <div class="example-box" *ngFor="let item of t.task" (contextmenu)="onContextMenuTask($event, item,t)"
+         (click)="openTaskInformation(item)" cdkDrag>{{item.title}}</div>
     <div class="example-box" >
       <form >
         <mat-form-field class="example-full-width" >
@@ -48,7 +49,7 @@
 </mat-menu>
 
 <mat-menu #contextMenuTask="matMenu">
-  <ng-template matMenuContent let-item='task'>
-    <button mat-menu-item >Delete {{item.title}} </button>
+  <ng-template matMenuContent let-item='task' let-row='row'>
+    <button mat-menu-item (click)="onRightClickTask(item,row)">Delete {{item.title}} </button>
   </ng-template>
 </mat-menu>

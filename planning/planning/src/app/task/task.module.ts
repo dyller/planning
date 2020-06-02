@@ -13,10 +13,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from "@angular/material/menu";
 import { DialogRowDeleteComponent } from './dialogs/dialog-row-delete/dialog-row-delete.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { TaskInfomationComponent } from './dialogs/task-infomation/task-infomation.component';
 
 
 @NgModule({
-  declarations: [TaskComponent, DialogRowDeleteComponent],
+  declarations: [TaskComponent, DialogRowDeleteComponent, TaskInfomationComponent],
   imports: [
     CommonModule,
     TaskRoutingModule,

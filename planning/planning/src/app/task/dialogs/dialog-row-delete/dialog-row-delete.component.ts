@@ -11,7 +11,7 @@ export class DialogRowDeleteComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogRowDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: RowModel) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
     this.dialogRef.close();

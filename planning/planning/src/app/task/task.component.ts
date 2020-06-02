@@ -11,6 +11,7 @@ import {MatMenuTrigger} from "@angular/material/menu";
 import {stringify} from "querystring";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogRowDeleteComponent} from "./dialogs/dialog-row-delete/dialog-row-delete.component";
+import {TaskInfomationComponent} from "./dialogs/task-infomation/task-infomation.component";
 
 @Component({
   selector: 'app-task',
@@ -22,8 +23,6 @@ export class TaskComponent implements OnInit {
   done = true;
   board: RowModel[] ;
   @ViewChildren(MatMenuTrigger) trigger: QueryList<MatMenuTrigger>;
- 
-
   contextMenuPosition = { x: '0px', y: '0px' };
   constructor(private boardServiceService: BoardServiceService,
               public dialog: MatDialog) {
@@ -40,21 +39,36 @@ export class TaskComponent implements OnInit {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
   }
-  onContextMenuTask(event: MouseEvent, item: TaskModel) {
+  onContextMenuTask(event: MouseEvent, item: TaskModel, row: RowModel) {
     console.log('here' + this.contextMenuPosition.x);
     this.contextPosition(event);
-    this.trigger.toArray()[1].menuData ={'task': item};
+    this.trigger.toArray()[1].menuData ={'task': item,
+                                          'row': row};
     this.trigger.toArray()[1].menu.focusFirstItem('mouse');
     this.trigger.toArray()[1].openMenu();
   }
   drop(event: CdkDragDrop<any[]>) {
+    // move item in same row
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      const split = event.container.id.split('-');
+      const id = parseFloat(split[split.length - 1 ]);
+      this.boardServiceService.updateRow(this.board[id]);
     } else {
+      // move item to new row
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      const splitPrev = event.previousContainer.id.split('-');
+      const idPrev = parseFloat(splitPrev[splitPrev.length - 1 ]);
+      const split = event.container.id.split('-');
+      const id = parseFloat(split[split.length - 1 ]);
+      // previous
+      this.boardServiceService.updateRow(this.board[idPrev]);
+      // moved to
+      this.boardServiceService.updateRow(this.board[id]);
     }
   }
 
@@ -132,4 +146,34 @@ export class TaskComponent implements OnInit {
   }
 
 
+  onRightClickTask(taskModel: TaskModel, row: RowModel) {
+    if (taskModel) {
+      const dialogRef = this.dialog.open(DialogRowDeleteComponent, {
+        data: {name: taskModel.title}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.boardServiceService.deleteTask(taskModel.taskId, row).subscribe(taskModelResponse => {
+            alert(`row "${taskModelResponse.title}" is deleted`);
+          });
+        }
+      });
+    } else {
+      alert('Error happen contact support pls.');
+    }
+  }
+  openTaskInformation(taskModel: TaskModel) {
+    if (taskModel) {
+      const dialogRef = this.dialog.open(TaskInfomationComponent, {
+        data: taskModel
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          alert('Result changed');
+        }
+      });
+    } else {
+      alert('Error happen contact support pls.');
+    }
+    }
 }

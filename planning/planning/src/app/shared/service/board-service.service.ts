@@ -6,6 +6,7 @@ import {from, Observable} from 'rxjs';
 import {first, map, switchMap, tap} from 'rxjs/operators';
 import {TaskModel} from '../entities/task-model';
 import {forEachComment} from "tslint";
+import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 const rowModelPath = environment.rowModelPath;
 const taskModelPath = environment.taskModelPath;
 @Injectable({
@@ -138,7 +139,7 @@ export class BoardServiceService {
               map(() => {
                 const data = productDocument.data() as RowModel;
                 data.task.forEach( task => {
-                  this.deleteTask(task.taskId).subscribe();
+                  this.deleteTask(task.taskId, null).subscribe();
                 });
                 data.rowId = productDocument.id;
                 return data;
@@ -148,7 +149,11 @@ export class BoardServiceService {
         })
       );
   }
-  deleteTask(taskId: string): Observable<TaskModel> {
+  deleteTask(taskId: string, rowModel: RowModel): Observable<TaskModel> {
+    if (rowModel) {
+      rowModel.task = rowModel.task.filter(item => item.taskId !== taskId);
+      this.updateRow(rowModel);
+    }
     return this.firestore.doc<TaskModel>(taskModelPath + '/' + taskId)
       .get()
       .pipe(
@@ -170,5 +175,16 @@ export class BoardServiceService {
           }
         })
       );
+  }
+
+  // update task in database
+  updateTask(taskModel: TaskModel) {
+    try {
+        this.firestore.collection(taskModelPath).doc(taskModel.taskId).update(
+        taskModel
+      );
+    } catch (e) {
+      console.log('Error: ' +e.message);
+    }
   }
 }

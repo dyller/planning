@@ -42,6 +42,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="ts.external.directory.path" value="C:\Users\liver\OneDrive\Dokumenter\GitHub\planning\planning\planning\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -72,7 +73,10 @@
       <workItem from="1590253439935" duration="637000" />
       <workItem from="1590310311353" duration="11922000" />
       <workItem from="1590410052580" duration="3183000" />
-      <workItem from="1590476082948" duration="9699000" />
+      <workItem from="1590476082948" duration="11105000" />
+      <workItem from="1590557664412" duration="7453000" />
+      <workItem from="1590820620542" duration="1263000" />
+      <workItem from="1590901953185" duration="6396000" />
     </task>
     <servers />
   </component>
@@ -96,10 +100,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1590048242722" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1590500055251">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1591088103795">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1590500055251" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591088103795" />
+    <state x="406" y="135" key="refactoring.ChangeSignatureDialog" timestamp="1591091580464">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="406" y="135" key="refactoring.ChangeSignatureDialog/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591091580464" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1591088792640">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591088792640" />
     <state x="346" y="49" width="670" height="58" key="search.everywhere.popup" timestamp="1590387220938">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -1,0 +1,9 @@
+<form [formGroup]="taskFormGroup" >
+  <div fxLayout="column">
+    <mat-form-field >
+      <input class="form-control" type="title" matInput placeholder="Task Title"
+             formControlName="title" (focusout)="saveTaskInformation()" (ngModelChange)="changeDone()">
+    </mat-form-field>
+  </div>
+  <button mat-button mat-raised-button [mat-dialog-close]="">Back</button>
+</form>
