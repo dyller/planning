@@ -33,7 +33,7 @@ export class TaskInfomationComponent implements OnInit {
     if ( this.changed) {
       const task: TaskModel = this.taskFormGroup.value;
       task.taskId = this.data.taskId;
-      this.boardServiceService.updateTask(task);
+      this.boardServiceService.updateTask(task).subscribe();
     }
   }
 

@@ -76,7 +76,7 @@
       <workItem from="1590476082948" duration="11105000" />
       <workItem from="1590557664412" duration="7453000" />
       <workItem from="1590820620542" duration="1263000" />
-      <workItem from="1590901953185" duration="6396000" />
+      <workItem from="1590901953185" duration="10464000" />
     </task>
     <servers />
   </component>
@@ -124,6 +124,12 @@
           <url>file://$PROJECT_DIR$/planning/planning/src/app/task/task.component.ts</url>
           <line>4</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/planning/planning/src/app/shared/service/board-service.service.ts</url>
+          <line>115</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

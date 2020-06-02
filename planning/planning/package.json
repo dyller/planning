@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
     "@material/card": "^5.1.0",
+    "@ngxs/store": "^3.6.2",
     "firebase": "^7.9.3",
     "firebaseui": "^4.4.0",
     "rxjs": "~6.5.4",

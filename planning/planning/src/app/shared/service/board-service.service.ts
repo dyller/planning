@@ -96,8 +96,25 @@ export class BoardServiceService {
     } catch (e) {
     }
   }
-
+  // Get task by id + snapshotchange so you will get update if something change.
   readTaskById(taskId: string): Observable<TaskModel> {
+    return this.firestore
+      .collection<TaskModel>(taskModelPath)
+      // This will return an Observable
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          // actions is an array of DocumentChangeAction
+
+            const action = actions.find(test => test.payload.doc.id === taskId);
+            const data = action.payload.doc.data() as TaskModel;
+            return {
+            title: data.title,
+            taskId: action.payload.doc.id
+          };
+        })
+      );
+    /*
     return  this.firestore.doc<TaskModel>(taskModelPath + '/' + taskId)
       .get()
       .pipe(
@@ -120,7 +137,7 @@ export class BoardServiceService {
             );
           }
         })
-      );
+      );*/
   }
 
   deleteRow(rowModelId: string): Observable<RowModel> {
@@ -178,13 +195,13 @@ export class BoardServiceService {
   }
 
   // update task in database
-  updateTask(taskModel: TaskModel) {
+  updateTask(taskModel: TaskModel): Observable<any> {
     try {
-        this.firestore.collection(taskModelPath).doc(taskModel.taskId).update(
+        return from(this.firestore.collection(taskModelPath).doc(taskModel.taskId).update(
         taskModel
-      );
+      ));
     } catch (e) {
-      console.log('Error: ' +e.message);
+      console.log('Error: ' + e.message);
     }
   }
 }
