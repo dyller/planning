@@ -21,7 +21,9 @@ export const environment = {
     measurementId: 'G-FCLKGNXFL6'
   },
   rowModelPath: 'rowModel',
-  taskModelPath: 'taskModel'
+  taskModelPath: 'taskModel',
+  taskTitleMinLength: 1,
+  taskTitleMaxLength: 20
 };
 
 /*

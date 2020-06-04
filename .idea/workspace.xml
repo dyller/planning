@@ -76,7 +76,8 @@
       <workItem from="1590476082948" duration="11105000" />
       <workItem from="1590557664412" duration="7453000" />
       <workItem from="1590820620542" duration="1263000" />
-      <workItem from="1590901953185" duration="10464000" />
+      <workItem from="1590901953185" duration="21968000" />
+      <workItem from="1591201422621" duration="7583000" />
     </task>
     <servers />
   </component>
@@ -108,14 +109,15 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="406" y="135" key="refactoring.ChangeSignatureDialog/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591091580464" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1591088792640">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1591256705944">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591088792640" />
-    <state x="346" y="49" width="670" height="58" key="search.everywhere.popup" timestamp="1590387220938">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1591256705944" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1591204914535">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="670" height="58" key="search.everywhere.popup/0.0.1366.728/-1920.0.1920.1040@0.0.1366.728" timestamp="1590387220938" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591204914535" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -127,8 +129,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/planning/planning/src/app/shared/service/board-service.service.ts</url>
-          <line>115</line>
-          <properties lambdaOrdinal="-1" />
+          <line>113</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

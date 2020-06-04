@@ -108,10 +108,8 @@ export class BoardServiceService {
 
             const action = actions.find(test => test.payload.doc.id === taskId);
             const data = action.payload.doc.data() as TaskModel;
-            return {
-            title: data.title,
-            taskId: action.payload.doc.id
-          };
+            data.taskId = action.payload.doc.id;
+            return data;
         })
       );
     /*

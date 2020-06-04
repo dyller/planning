@@ -2,8 +2,41 @@
   <div fxLayout="column">
     <mat-form-field >
       <input class="form-control" type="title" matInput placeholder="Task Title"
-             formControlName="title" (focusout)="saveTaskInformation()" (ngModelChange)="changeDone()">
+             formControlName="title" (focusout)="saveTaskInformation()" (ngModelChange)="changeDone()" required
+             minlength="{{taskTitleMinLength}}" maxlength="{{taskTitleMaxLength}}">
+      <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+      <mat-error *ngIf="hasError('title', 'maxlength')">You have more than {{taskTitleMaxLength}} characters</mat-error>
     </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field >
+      <input class="form-control" type="timeUsed" matInput placeholder="Total time used"
+             formControlName="timeUsed" (focusout)="saveTaskInformation()" (ngModelChange)="changeDone()">
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field >
+      <input class="form-control" type="timeEstimated" matInput placeholder="Time Estimated"
+             formControlName="timeEstimated" (focusout)="saveTaskInformation()" (ngModelChange)="changeDone()">
+    </mat-form-field>
+  </div>
+  <div fxLayout="column">
+    <mat-form-field *ngIf="showInformation">
+      <mat-label>Information</mat-label>
+      <textarea class="information-textarea"  [(ngModel)]="data.information" #informationTextarea matInput type="information" formControlName="information" (focusout)="showTextAreaInformation();" (ngModelChange)="changeDone()"></textarea>
+    </mat-form-field>
+    <div class="information-textarea" *ngIf="!showInformation" >
+       <h2 (click)="showTextAreaInformation()">TaskInformation </h2>
+      <div *ngFor="let line of taskInformationText;let i = index">
+        <div *ngIf="line.startsWith('*',0)" >
+          <mat-checkbox [checked]="line.startsWith('**')" (change)="changeCheckBoxValue(i)">{{removeStarFromStart(line)}}</mat-checkbox>
+        </div>
+      <div *ngIf="!line.startsWith('*',0)" (click)="showTextAreaInformation()">
+        {{line}}
+      </div>
+      </div>
+
+    </div>
   </div>
   <button mat-button mat-raised-button [mat-dialog-close]="">Back</button>
 </form>

@@ -14,6 +14,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { DialogRowDeleteComponent } from './dialogs/dialog-row-delete/dialog-row-delete.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { TaskInfomationComponent } from './dialogs/task-infomation/task-infomation.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TaskInfomationComponent } from './dialogs/task-infomation/task-infomati
     MatCardModule,
     FormsModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ]
 })
 export class TaskModule { }

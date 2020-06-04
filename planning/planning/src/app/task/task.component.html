@@ -2,15 +2,20 @@
 
   <div  class="example-container" *ngFor="let t of board" >
     <div class="example-list" >
-  <h2 class="title-task" (contextmenu)="onContextMenuRow($event, t)">{{t.name}}</h2>
 
+  <h2 class="title-task" (contextmenu)="onContextMenuRow($event, t)">{{t.name}}</h2>
   <div
     cdkDropList
     [cdkDropListData]="t.task"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of t.task" (contextmenu)="onContextMenuTask($event, item,t)"
-         (click)="openTaskInformation(item)" cdkDrag>{{item.title}}</div>
+         (click)="openTaskInformation(item)" cdkDrag>{{item.title}}
+
+    <div class="time-left" *ngIf="item.timeUsed && item.timeEstimated">
+      <div class="time-left-label">Time Left</div>
+      {{item.timeEstimated - item.timeUsed}}
+    </div></div>
     <div class="example-box" >
       <form >
         <mat-form-field class="example-full-width" >
