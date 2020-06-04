@@ -7,8 +7,10 @@ import {first, map, switchMap, tap} from 'rxjs/operators';
 import {TaskModel} from '../entities/task-model';
 import {forEachComment} from "tslint";
 import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
+import {BoardModel} from "../entities/board-model";
 const rowModelPath = environment.rowModelPath;
 const taskModelPath = environment.taskModelPath;
+const boardModelPath = environment.boardModelPath;
 @Injectable({
   providedIn: 'root'
 })
@@ -87,10 +89,15 @@ export class BoardServiceService {
   }
   // used to update rows
   updateRow(rowModel: RowModel) {
+
     try {
+      const taskId = [];
+      rowModel.task.forEach(task => {
+        taskId.push({taskId: task.taskId});
+      });
       this.firestore.collection(rowModelPath).doc(rowModel.rowId).update(
         {
-          task: rowModel.task
+          task: taskId
         }
       );
     } catch (e) {
@@ -105,7 +112,6 @@ export class BoardServiceService {
       .pipe(
         map(actions => {
           // actions is an array of DocumentChangeAction
-
             const action = actions.find(test => test.payload.doc.id === taskId);
             const data = action.payload.doc.data() as TaskModel;
             data.taskId = action.payload.doc.id;
@@ -201,5 +207,26 @@ export class BoardServiceService {
     } catch (e) {
       console.log('Error: ' + e.message);
     }
+  }
+// create new board in firebase collection it returb boardmodel with id.
+  createNewBoard(board: BoardModel): Observable<BoardModel> {
+    return from(this.firestore.collection<BoardModel>(boardModelPath).add(board))
+      .pipe(
+        first(),
+        tap(() => {
+        }),
+        switchMap(productDocument => {
+          return from(
+            this.firestore.doc<BoardModel>(boardModelPath + '/' + productDocument.id)
+              .get()
+          ).pipe(
+            map(documentData => {
+              const data = documentData.data() as BoardModel;
+              data.boardId = productDocument.id;
+              return data;
+            })
+          );
+        })
+      );
   }
 }
