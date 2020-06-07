@@ -1,8 +1,37 @@
 <div class="start">
-  <form >
+
+    <div  class="example-container" *ngFor="let t of boards" >
+      <div *ngIf="!t.imgPath" style="background-image: url(assets/default-board.jpg)" class="example-list"
+           (contextmenu)="onContextMenuBoard($event, t)">
+        {{t.boardName}}
+      </div>
+      <div *ngIf="t.imgPath" style="background-image: url(assets/account.png)" class="example-list" >
+        {{t.boardName}}
+      </div>
+    </div>
+
+    <div class="example-container">
+      <form >
+      <mat-form-field class="example-full-width" >
+        <mat-label>New Board</mat-label>
+        <input  matInput    #txtVal (keydown.enter)="saveBoard($event)" >
+      </mat-form-field>
+      </form>
+    </div>
+ <!-- <form >
     <mat-form-field class="example-full-width" >
       <mat-label>New task</mat-label>
       <input  matInput    #txtVal (keydown.enter)="saveBoard($event)" >
     </mat-form-field>
-  </form>
+  </form>-->
+  <div style="visibility: hidden; position: fixed"
+       [style.left]="contextMenuPosition.x"
+       [style.top]="contextMenuPosition.y"
+       [matMenuTriggerFor]="contextMenuBoard">
+  </div>
 </div>
+<mat-menu #contextMenuBoard="matMenu">
+  <ng-template matMenuContent let-item='board' >
+    <button mat-menu-item (click)="onRightClickBoard(item)">Delete {{item.boardName}} </button>
+  </ng-template>
+</mat-menu>

@@ -8,3 +8,24 @@
 .example-full-width {
   width: 100%;
 }
+.example-list {
+  border-radius: 25px;
+  color: red;
+  text-align: center;
+  line-height: 80px;
+  vertical-align: middle;
+  border: solid 1px #ccc;
+  min-height: 80px;
+  max-height: 80px;
+  background: white;
+  overflow: hidden;
+  background-size: 300px auto;
+  display: block;
+}
+.example-container {
+  width: 300px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}

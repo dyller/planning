@@ -24,6 +24,8 @@ import {NgxsModule} from '@ngxs/store';
 import {BoardState} from './shared/ngxs-statemanangement/board-state';
 import { BoardListComponent } from './board/board-list/board-list.component';
 import {MatInputModule} from "@angular/material/input";
+import { BoardUpdateComponent } from './board/board-update/board-update.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -31,28 +33,31 @@ import {MatInputModule} from "@angular/material/input";
     FrontPageComponent,
     NavbarComponent,
     BoardListComponent,
+    BoardUpdateComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatSelectModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-    MatMenuModule,
-    NgxsModule.forRoot(
-      [BoardState]
-    ),
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatSelectModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireStorageModule,
+        AngularFireAuthModule,
+        MatMenuModule,
+        NgxsModule.forRoot(
+            [BoardState]
+        ),
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatDialogModule
+    ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })

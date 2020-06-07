@@ -40,7 +40,7 @@ export class TaskComponent implements OnInit {
     this.contextMenuPosition.y = event.clientY + 'px';
   }
   onContextMenuTask(event: MouseEvent, item: TaskModel, row: RowModel) {
-    console.log('here' + this.contextMenuPosition.x);
+
     this.contextPosition(event);
     this.trigger.toArray()[1].menuData ={'task': item,
                                           'row': row};
@@ -131,7 +131,7 @@ export class TaskComponent implements OnInit {
   onRightClickRow(rowModel: RowModel) {
     if (rowModel) {
       const dialogRef = this.dialog.open(DialogRowDeleteComponent, {
-        data: {name: rowModel.name}
+        data: {message: `Are you sure you will delete row  "${rowModel.name}" ?`}
       });
       dialogRef.afterClosed().subscribe(result => {
        if (result) {
@@ -149,7 +149,7 @@ export class TaskComponent implements OnInit {
   onRightClickTask(taskModel: TaskModel, row: RowModel) {
     if (taskModel) {
       const dialogRef = this.dialog.open(DialogRowDeleteComponent, {
-        data: {name: taskModel.title}
+        data: {message: `Are you sure you will delete task  "${taskModel.title}" ?`}
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {

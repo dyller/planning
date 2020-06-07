@@ -5,9 +5,9 @@ import {environment} from '../../../environments/environment';
 import {from, Observable} from 'rxjs';
 import {first, map, switchMap, tap} from 'rxjs/operators';
 import {TaskModel} from '../entities/task-model';
-import {forEachComment} from "tslint";
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
-import {BoardModel} from "../entities/board-model";
+import {forEachComment} from 'tslint';
+import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
+import {BoardModel} from '../entities/board-model';
 const rowModelPath = environment.rowModelPath;
 const taskModelPath = environment.taskModelPath;
 const boardModelPath = environment.boardModelPath;
@@ -113,9 +113,14 @@ export class BoardServiceService {
         map(actions => {
           // actions is an array of DocumentChangeAction
             const action = actions.find(test => test.payload.doc.id === taskId);
-            const data = action.payload.doc.data() as TaskModel;
-            data.taskId = action.payload.doc.id;
-            return data;
+            if (action && action.payload) {
+              const data = action.payload.doc.data() as TaskModel;
+              data.taskId = action.payload.doc.id;
+              return data;
+            } else {
+              return null;
+            }
+
         })
       );
     /*
@@ -226,6 +231,53 @@ export class BoardServiceService {
               return data;
             })
           );
+        })
+      );
+  }
+// Return all board from database.
+  readBoards(): Observable<BoardModel[]> {
+    return this.firestore
+      .collection<BoardModel>(boardModelPath)
+      // This will return an Observable
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          // actions is an array of DocumentChangeAction
+          return actions.map(action => {
+            const data = action.payload.doc.data() as BoardModel;
+            return {
+              boardName: data.boardName,
+              row: data.row,
+              boardId: action.payload.doc.id
+            };
+          });
+        })
+      );
+  }
+
+  deleteBoard(boardId: string): Observable<BoardModel> {
+    return this.firestore.doc<BoardModel>(boardModelPath + '/' + boardId)
+      .get()
+      .pipe(
+        first(),
+        switchMap(productDocument => {
+          if (!productDocument || !productDocument.data()) {
+            throw new Error('Board is not found');
+          } else {
+            return from(
+              this.firestore.doc<RowModel>(boardModelPath + '/' + boardId)
+                .delete()
+            ).pipe(
+              map(() => {
+                const data = productDocument.data() as BoardModel;
+                data.row.forEach( row => {
+                  this.deleteRow(row.rowId).subscribe();
+                });
+                data.boardId = productDocument.id;
+                return data;
+              })
+            );
+          }
         })
       );
   }

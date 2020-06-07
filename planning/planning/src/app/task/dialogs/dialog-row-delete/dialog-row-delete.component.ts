@@ -13,12 +13,8 @@ export class DialogRowDeleteComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogRowDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-
   ngOnInit(): void {
   }
+
 
 }

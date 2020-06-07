@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/untitled" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/planning/planning/src/assets" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -50,6 +50,9 @@
       <recent name="C:\Users\liver\OneDrive\Dokumenter\GitHub\planning\planning" />
       <recent name="C:\Users\liver\Desktop\planning\planning\planning\src\app\task" />
       <recent name="C:\Users\liver\Desktop\planning\planning\planning\src\app\user\service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\liver\OneDrive\Dokumenter\GitHub\planning\planning\planning\src\assets" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -77,7 +80,10 @@
       <workItem from="1590557664412" duration="7453000" />
       <workItem from="1590820620542" duration="1263000" />
       <workItem from="1590901953185" duration="21968000" />
-      <workItem from="1591201422621" duration="15126000" />
+      <workItem from="1591201422621" duration="16816000" />
+      <workItem from="1591286464086" duration="4683000" />
+      <workItem from="1591296145238" duration="3223000" />
+      <workItem from="1591346683981" duration="6195000" />
     </task>
     <servers />
   </component>
@@ -123,8 +129,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/planning/planning/src/app/task/task.component.ts</url>
-          <line>4</line>
+          <url>file://$PROJECT_DIR$/planning/planning/src/app/task/dialogs/dialog-row-delete/dialog-row-delete.component.html</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -1,0 +1,15 @@
+<form [formGroup]="boardFormGroup" >
+  <div fxLayout="column">
+    <mat-form-field >
+      <input class="form-control" type="boardName" matInput placeholder="Board Name"
+             formControlName="boardName" (focusout)="updateBoardInformation()" (ngModelChange)="readyToUpdate()" required
+             minlength="{{boardNameMinLength}}" maxlength="{{boardNameMaxLength}}">
+      <mat-error *ngIf="hasError('boardName', 'required')">Title is required</mat-error>
+      <mat-error *ngIf="hasError('boardName', 'maxlength')">You have more than {{boardNameMaxLength}} characters</mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+  <button mat-button mat-raised-button [mat-dialog-close]="">Back</button>
+</form>

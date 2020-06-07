@@ -24,7 +24,10 @@ export const environment = {
   taskModelPath: 'taskModel',
   taskTitleMinLength: 1,
   taskTitleMaxLength: 20,
-  boardModelPath: 'boardModel'
+  boardModelPath: 'boardModel',
+  boardNameMinLength: 1,
+  boardNameMaxLength: 20
+
 };
 
 /*
