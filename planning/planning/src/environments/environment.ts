@@ -26,7 +26,8 @@ export const environment = {
   taskTitleMaxLength: 20,
   boardModelPath: 'boardModel',
   boardNameMinLength: 1,
-  boardNameMaxLength: 20
+  boardNameMaxLength: 20,
+  fileModelPath: 'files',
 
 };
 

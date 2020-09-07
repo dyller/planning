@@ -26,6 +26,7 @@ import { BoardListComponent } from './board/board-list/board-list.component';
 import {MatInputModule} from "@angular/material/input";
 import { BoardUpdateComponent } from './board/board-update/board-update.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatFormFieldModule,
         MatInputModule,
         MatCardModule,
-        MatDialogModule
+        MatDialogModule,
+        ImageCropperModule
     ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

@@ -37,6 +37,7 @@ export class TaskInfomationComponent implements OnInit {
 
   ngOnInit(): void {
     this.convertInformationTohtmlObject();
+
   }
 
   saveTaskInformation() {

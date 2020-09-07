@@ -5,4 +5,5 @@ export interface BoardModel {
   boardName: string;
   row?: RowModel[];
   imgPath?: string;
+  imageId?: string;
 }

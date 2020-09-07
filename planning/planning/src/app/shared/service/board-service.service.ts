@@ -2,21 +2,26 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {RowModel} from '../entities/row-model';
 import {environment} from '../../../environments/environment';
-import {from, Observable} from 'rxjs';
+import {from, Observable, throwError} from 'rxjs';
 import {first, map, switchMap, tap} from 'rxjs/operators';
 import {TaskModel} from '../entities/task-model';
 import {forEachComment} from 'tslint';
 import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
 import {BoardModel} from '../entities/board-model';
+import {ImageMetadata} from '../entities/image-metadata';
+import {FileMetadata} from '../entities/file-metadata';
+import {AngularFireStorage} from '@angular/fire/storage';
 const rowModelPath = environment.rowModelPath;
 const taskModelPath = environment.taskModelPath;
 const boardModelPath = environment.boardModelPath;
+const fileModelPath  = environment.fileModelPath;
 @Injectable({
   providedIn: 'root'
 })
 export class BoardServiceService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,
+              private fireStorage: AngularFireStorage) { }
 
 
 
@@ -245,11 +250,8 @@ export class BoardServiceService {
           // actions is an array of DocumentChangeAction
           return actions.map(action => {
             const data = action.payload.doc.data() as BoardModel;
-            return {
-              boardName: data.boardName,
-              row: data.row,
-              boardId: action.payload.doc.id
-            };
+            data.boardId = action.payload.doc.id;
+            return data;
           });
         })
       );
@@ -280,5 +282,28 @@ export class BoardServiceService {
           }
         })
       );
+  }
+
+  updateBoard(boardData: BoardModel, imageMeta: ImageMetadata): Observable<any> {
+    if (imageMeta && imageMeta.fileMeta
+      && imageMeta.fileMeta.name && imageMeta.fileMeta.type &&
+      (imageMeta.imageBlob || imageMeta.base64Image)) {
+      return from(this.firestore.collection<FileMetadata>(fileModelPath).add(imageMeta.fileMeta).then( file => {
+        const base64EncodedImageString = imageMeta.base64Image.replace(/^data:image\/\w+;base64,/, '');
+        this.fireStorage.ref('image/' + file.id).put(imageMeta.imageBlob).then( image => {
+          boardData.imageId = file.id;
+          this.firestore.collection(boardModelPath).doc(boardData.boardId).update(
+            boardData
+          ).then(r => {});
+        });
+      }));
+    } else {
+      return throwError('You need better metadata');
+    }
+  }
+
+  imageFile(imageId: string): Observable<any> {
+    return this.fireStorage.ref('image/' + imageId)
+      .getDownloadURL();
   }
 }

@@ -83,7 +83,11 @@
       <workItem from="1591201422621" duration="16816000" />
       <workItem from="1591286464086" duration="4683000" />
       <workItem from="1591296145238" duration="3223000" />
-      <workItem from="1591346683981" duration="6195000" />
+      <workItem from="1591346683981" duration="8008000" />
+      <workItem from="1591547003311" duration="1185000" />
+      <workItem from="1591600166855" duration="10407000" />
+      <workItem from="1592560174972" duration="6423000" />
+      <workItem from="1599489684335" duration="1194000" />
     </task>
     <servers />
   </component>
@@ -131,8 +135,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/planning/planning/src/app/task/dialogs/dialog-row-delete/dialog-row-delete.component.html</url>
           <line>3</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/planning/planning/src/app/board/board-update/board-update.component.ts</url>
+          <line>91</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

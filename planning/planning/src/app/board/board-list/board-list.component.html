@@ -5,7 +5,7 @@
            (contextmenu)="onContextMenuBoard($event, t)">
         {{t.boardName}}
       </div>
-      <div *ngIf="t.imgPath" style="background-image: url(assets/account.png)" class="example-list" >
+      <div *ngIf="t.imgPath" [ngStyle]="{'background-image': 'url(' +t.imgPath +')'}" class="example-list" >
         {{t.boardName}}
       </div>
     </div>

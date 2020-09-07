@@ -6,6 +6,7 @@ import {DialogRowDeleteComponent} from "../../task/dialogs/dialog-row-delete/dia
 import {MatDialog} from "@angular/material/dialog";
 import {BoardUpdateComponent} from "../board-update/board-update.component";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {forEachComment} from "tslint";
 
 @Component({
   selector: 'app-board-list',
@@ -38,7 +39,16 @@ export class BoardListComponent implements OnInit {
 
   initBoard() {
     this.boardService.readBoards().subscribe( boardsData => {
+      boardsData.forEach( board => {
+        if (board.imageId) {
+          this.boardService.imageFile(board.imageId).subscribe(imageUrl => {
+            board.imgPath = imageUrl;
+
+          });
+        }
+      });
       this.boards = boardsData;
+
     });
   }
   // Open update board.
@@ -84,4 +94,5 @@ export class BoardListComponent implements OnInit {
       alert('Error happen contact support pls.');
     }
   }
+
 }

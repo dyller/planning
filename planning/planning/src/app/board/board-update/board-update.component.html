@@ -2,7 +2,7 @@
   <div fxLayout="column">
     <mat-form-field >
       <input class="form-control" type="boardName" matInput placeholder="Board Name"
-             formControlName="boardName" (focusout)="updateBoardInformation()" (ngModelChange)="readyToUpdate()" required
+             formControlName="boardName" (ngModelChange)="readyToUpdate()" required
              minlength="{{boardNameMinLength}}" maxlength="{{boardNameMaxLength}}">
       <mat-error *ngIf="hasError('boardName', 'required')">Title is required</mat-error>
       <mat-error *ngIf="hasError('boardName', 'maxlength')">You have more than {{boardNameMaxLength}} characters</mat-error>
@@ -10,6 +10,17 @@
   </div>
 
 
-
+  <input id="chooseFile" type="file" (change)="uploadFile($event)" accept="image/*" >
   <button mat-button mat-raised-button [mat-dialog-close]="">Back</button>
 </form>
+<div id="image">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="300 / 80"
+    [cropperMinHeight]="800"
+    [cropperMinWidth]="3000"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+</div>
